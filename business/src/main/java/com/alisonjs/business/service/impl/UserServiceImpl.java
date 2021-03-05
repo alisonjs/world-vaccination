@@ -1,7 +1,9 @@
 package com.alisonjs.business.service.impl;
 
 import com.alisonjs.business.domain.User;
+import com.alisonjs.business.exceptions.AuthorizationException;
 import com.alisonjs.business.exceptions.BusinessException;
+import com.alisonjs.business.exceptions.NotFoundException;
 import com.alisonjs.business.repository.UserRepository;
 import com.alisonjs.business.service.UserService;
 
@@ -27,7 +29,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getOne(Long id) {
-        return repository.getOne(id);
+        User user = repository.getOne(id);
+        if(user == null) {
+            throw new NotFoundException("User not found with the given id  " + id);
+        }
+        return user;
     }
 
     @Override
@@ -37,7 +43,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
-        return repository.getByUsernameAndPassword(username, password);
+        User userLogged = repository.getByUsernameAndPassword(username, password);
+        if(userLogged == null){
+            throw new AuthorizationException("User or password incorrect.");
+        }
+        return userLogged;
     }
 
     @Override
