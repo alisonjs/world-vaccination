@@ -6,6 +6,7 @@ import com.alisonjs.business.exceptions.BusinessException;
 import com.alisonjs.business.exceptions.NotFoundException;
 import com.alisonjs.business.repository.UserRepository;
 import com.alisonjs.business.service.UserService;
+import com.alisonjs.business.utils.HashUtil;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) throws BusinessException {
         businessValidation(user);
+        user.setPassword(HashUtil.getSecureHash(user.getPassword()));
         return repository.save(user);
     }
 
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
-        User userLogged = repository.getByUsernameAndPassword(username, password);
+        User userLogged = repository.getByUsernameAndPassword(username, HashUtil.getSecureHash(password));
         if(userLogged == null){
             throw new AuthorizationException("User or password incorrect.");
         }

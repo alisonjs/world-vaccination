@@ -56,4 +56,12 @@ public class UserController {
         User loggedUer = userService.login(user.getUsername(), user.getPassword());
         return ResponseEntity.ok(mapper.fromModel(loggedUer));
     }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<UserDto> login(@PathVariable(name="id") Long id, @RequestBody String password){
+        User user = userService.getOne(id);
+        user.setPassword(password);
+        User savedUser = userService.save(user);
+        return ResponseEntity.ok(mapper.fromModel(savedUser));
+    }
 }
