@@ -20,7 +20,7 @@
 	<url>https://github.com/alisonjs/world-vaccination</url>
 
 	<modules>
-		<module>domain</module>
+		<module>business</module>
 		<module>persistence</module>
 		<module>rest-producer</module>
 	</modules>
