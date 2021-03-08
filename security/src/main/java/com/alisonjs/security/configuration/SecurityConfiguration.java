@@ -5,14 +5,19 @@ import com.alisonjs.security.utils.CustomPasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
+@PropertySource(value = { "classpath:/security-application.properties", "classpath:/application.properties" },
+        ignoreResourceNotFound = true)
 @ComponentScan("com.alisonjs.security")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -34,5 +39,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers(HttpMethod.GET, "/dataset/**")
+                .antMatchers(HttpMethod.POST, "/users/login");
     }
 }

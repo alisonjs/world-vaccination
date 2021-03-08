@@ -5,6 +5,7 @@ import com.alisonjs.business.exceptions.BusinessException;
 import com.alisonjs.business.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -32,6 +33,13 @@ public class ControllerExceptionHandler {
 		ApiError error = ApiError.builder().code(HttpStatus.BAD_REQUEST.value()).msg(e.getMessage()).date(new Date())
 				.build();
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<ApiError> handlerBusinessException(BadCredentialsException e) {
+		ApiError error = ApiError.builder().code(HttpStatus.UNAUTHORIZED.value()).msg(e.getMessage()).date(new Date())
+				.build();
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
 	}
 
 }
