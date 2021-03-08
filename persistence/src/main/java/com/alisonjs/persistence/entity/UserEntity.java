@@ -12,19 +12,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity(name = "users")
-public class UserEntity extends BaseEntity{
+public class UserEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = 75, nullable = false)
-    private String email;
+	@Column(length = 75, nullable = false)
+	private String email;
 
-    @Column(length = 75, nullable = false)
-    private String username;
+	@Column(length = 75, nullable = false)
+	private String username;
 
-    @Column(length = 100, nullable = false)
-    private String password;
+	@Column(length = 100, nullable = false)
+	private String password;
 
 }

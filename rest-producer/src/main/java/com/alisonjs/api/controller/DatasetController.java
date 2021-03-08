@@ -19,48 +19,55 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class DatasetController {
 
-    private final DatasetService datasetService;
+	private final DatasetService datasetService;
 
-    private final DatasetDtoMapper mapper;
+	private final DatasetDtoMapper mapper;
 
-    public DatasetController(DatasetService datasetService, DatasetDtoMapper mapper) {
-        this.datasetService = datasetService;
-        this.mapper = mapper;
-    }
+	public DatasetController(DatasetService datasetService, DatasetDtoMapper mapper) {
+		this.datasetService = datasetService;
+		this.mapper = mapper;
+	}
 
-    @PostMapping()
-    public void save(){}
+	@PostMapping()
+	public void save() {
+	}
 
-    @GetMapping("/countries")
-    public ResponseEntity<List<String>> countries(){
-        return ResponseEntity.ok(datasetService.getCountries());
-    }
+	@GetMapping("/countries")
+	public ResponseEntity<List<String>> countries() {
+		return ResponseEntity.ok(datasetService.getCountries());
+	}
 
-    @GetMapping("/countries/total_vaccinations")
-    public ResponseEntity<List<DatasetTotalVaccinationsDto>> totalVaccinations(@RequestParam(name="limit", required = false) Integer limit, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
-        List<DatasetTotalVaccinationsDto> results = new ArrayList<>();
-        if(limit != null)
-            datasetService.getTotalVaccinations(limit, date).forEach(item -> results.add(mapper.toTotalVaccinationsDto(item)));
-        else
-            datasetService.getTotalVaccinations(date).forEach(item -> results.add(mapper.toTotalVaccinationsDto(item)));
-        return ResponseEntity.ok(results);
-    }
+	@GetMapping("/countries/total_vaccinations")
+	public ResponseEntity<List<DatasetTotalVaccinationsDto>> totalVaccinations(
+			@RequestParam(name = "limit", required = false) Integer limit,
+			@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+		List<DatasetTotalVaccinationsDto> results = new ArrayList<>();
+		if (limit != null)
+			datasetService.getTotalVaccinations(limit, date)
+					.forEach(item -> results.add(mapper.toTotalVaccinationsDto(item)));
+		else
+			datasetService.getTotalVaccinations(date).forEach(item -> results.add(mapper.toTotalVaccinationsDto(item)));
+		return ResponseEntity.ok(results);
+	}
 
-    @GetMapping("/country")
-    public ResponseEntity<DatasetCountryDto> country(@RequestParam("country") String country, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
-        return ResponseEntity.ok(mapper.toCountryDto(datasetService.getCountryInfo(country, date)));
-    }
+	@GetMapping("/country")
+	public ResponseEntity<DatasetCountryDto> country(@RequestParam("country") String country,
+			@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+		return ResponseEntity.ok(mapper.toCountryDto(datasetService.getCountryInfo(country, date)));
+	}
 
-    @GetMapping("/country/daily_vaccinations")
-    public ResponseEntity<List<DatasetDailyVaccinationsDto>> dailyVaccinations(@RequestParam("country") String country, @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
-        List<DatasetDailyVaccinationsDto> results = new ArrayList<>();
-        datasetService.getDailyVaccinations(country, date).forEach(item -> results.add(mapper.toDailyVaccinationsDto(item)));
-        return ResponseEntity.ok(results);
-    }
+	@GetMapping("/country/daily_vaccinations")
+	public ResponseEntity<List<DatasetDailyVaccinationsDto>> dailyVaccinations(@RequestParam("country") String country,
+			@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+		List<DatasetDailyVaccinationsDto> results = new ArrayList<>();
+		datasetService.getDailyVaccinations(country, date)
+				.forEach(item -> results.add(mapper.toDailyVaccinationsDto(item)));
+		return ResponseEntity.ok(results);
+	}
 
-    @GetMapping("/country/dates")
-    public ResponseEntity<DatasetDatesDto> dailyVaccinations(@RequestParam("country") String country){
-        return ResponseEntity.ok(mapper.toCountryDates(datasetService.getDates(country)));
-    }
+	@GetMapping("/country/dates")
+	public ResponseEntity<DatasetDatesDto> dailyVaccinations(@RequestParam("country") String country) {
+		return ResponseEntity.ok(mapper.toCountryDates(datasetService.getDates(country)));
+	}
 
 }

@@ -1,7 +1,5 @@
 package com.alisonjs.api.config;
 
-import com.alisonjs.api.dto.UserDto;
-import com.alisonjs.api.dto.mapper.UserDtoMapper;
 import com.alisonjs.business.repository.DatasetRepository;
 import com.alisonjs.business.repository.UserRepository;
 import com.alisonjs.business.service.DatasetService;
@@ -15,17 +13,17 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource(value = { "classpath:/application.properties" }, ignoreResourceNotFound = true)
-@ComponentScan(basePackages = { "com.alisonjs.persistence" })
+@ComponentScan(basePackages = { "com.alisonjs.business", "com.alisonjs.persistence" })
 public class ApiConfiguration {
 
-    @Bean
-    UserService userService(UserRepository userRepository){
-        return new UserServiceImpl(userRepository);
-    }
+	@Bean
+	UserService userService(UserRepository userRepository) {
+		return new UserServiceImpl(userRepository);
+	}
 
-    @Bean
-    DatasetService datasetService(DatasetRepository datasetRepository){
-        return new DatasetServiceImpl(datasetRepository);
-    }
+	@Bean
+	DatasetService datasetService(DatasetRepository datasetRepository) {
+		return new DatasetServiceImpl(datasetRepository);
+	}
 
 }

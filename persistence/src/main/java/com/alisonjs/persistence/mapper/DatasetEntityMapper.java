@@ -7,8 +7,8 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface DatasetEntityMapper {
 
-    DatasetEntity fromModel(Dataset dataset);
+	DatasetEntity fromModel(Dataset dataset);
 
-    Dataset toModel(DatasetEntity datasetEntity);
+	Dataset toModel(DatasetEntity datasetEntity);
 
 }

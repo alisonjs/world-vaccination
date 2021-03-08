@@ -16,54 +16,55 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository repository;
+	private final UserRepository repository;
 
-    public UserServiceImpl(UserRepository repository) {
-        this.repository = repository;
-    }
+	public UserServiceImpl(UserRepository repository) {
+		this.repository = repository;
+	}
 
-    @Override
-    public User save(User user) throws BusinessException {
-        businessValidation(user);
-        user.setPassword(HashUtil.getSecureHash(user.getPassword()));
-        return repository.save(user);
-    }
+	@Override
+	public User save(User user) throws BusinessException {
+		businessValidation(user);
+		user.setPassword(HashUtil.getSecureHash(user.getPassword()));
+		return repository.save(user);
+	}
 
-    @Override
-    public User getOne(Long id) {
-        User user = repository.getOne(id);
-        if(user == null) {
-            throw new NotFoundException("User not found with the given id  " + id);
-        }
-        return user;
-    }
+	@Override
+	public User getOne(Long id) {
+		User user = repository.getOne(id);
+		if (user == null) {
+			throw new NotFoundException("User not found with the given id  " + id);
+		}
+		return user;
+	}
 
-    @Override
-    public List<User> getAll() {
-        return repository.getAll();
-    }
+	@Override
+	public List<User> getAll() {
+		return repository.getAll();
+	}
 
-    @Override
-    public User login(String username, String password) {
-        User userLogged = repository.getByUsernameAndPassword(username, HashUtil.getSecureHash(password));
-        if(userLogged == null){
-            throw new AuthorizationException("User or password incorrect.");
-        }
-        return userLogged;
-    }
+	@Override
+	public User login(String username, String password) {
+		User userLogged = repository.getByUsernameAndPassword(username, HashUtil.getSecureHash(password));
+		if (userLogged == null) {
+			throw new AuthorizationException("User or password incorrect.");
+		}
+		return userLogged;
+	}
 
-    @Override
-    public void businessValidation(User user) throws BusinessException {
-        if (user.getUsername() == null || user.getUsername().isEmpty()) {
-            throw new BusinessException("Username required");
-        }
+	@Override
+	public void businessValidation(User user) throws BusinessException {
+		if (user.getUsername() == null || user.getUsername().isEmpty()) {
+			throw new BusinessException("Username required");
+		}
 
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            throw new BusinessException("Password required");
-        }
+		if (user.getPassword() == null || user.getPassword().isEmpty()) {
+			throw new BusinessException("Password required");
+		}
 
-        if (user.getEmail() == null || user.getEmail().isEmpty()) {
-            throw new BusinessException("Email required");
-        }
-    }
+		if (user.getEmail() == null || user.getEmail().isEmpty()) {
+			throw new BusinessException("Email required");
+		}
+	}
+
 }

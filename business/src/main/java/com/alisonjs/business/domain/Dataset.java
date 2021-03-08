@@ -13,36 +13,36 @@ import java.util.Date;
 @Data
 public class Dataset {
 
-    private Long id;
+	private Long id;
 
-    private String country;
+	private String country;
 
-    private String isoCode;
+	private String isoCode;
 
-    private Date date;
+	private Date date;
 
-    private Long totalVaccinations;
+	private Long totalVaccinations;
 
-    private Long peopleVaccinated;
+	private Long peopleVaccinated;
 
-    private Long peopleFullyVaccinated;
+	private Long peopleFullyVaccinated;
 
-    private Integer dailyVaccinationsRaw;
+	private Integer dailyVaccinationsRaw;
 
-    private Integer dailyVaccinations;
+	private Integer dailyVaccinations;
 
-    private Double totalVaccinationsPerHundred;
+	private Double totalVaccinationsPerHundred;
 
-    private Double peopleVaccinatedPerHundred;
+	private Double peopleVaccinatedPerHundred;
 
-    private Double peopleFullyVaccinatedPerHundred;
+	private Double peopleFullyVaccinatedPerHundred;
 
-    private Double dailyVaccinationsPerMillion;
+	private Double dailyVaccinationsPerMillion;
 
-    private String vaccines;
+	private String vaccines;
 
-    private String sourceName;
+	private String sourceName;
 
-    private String sourceWebsite;
+	private String sourceWebsite;
 
 }

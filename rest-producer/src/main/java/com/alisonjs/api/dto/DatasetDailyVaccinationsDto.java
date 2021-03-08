@@ -14,10 +14,11 @@ import java.util.Date;
 @Builder
 public class DatasetDailyVaccinationsDto {
 
-    private String country;
+	private String country;
 
-    @JsonProperty("daily_vaccinations")
-    private Integer dailyVaccinations;
+	@JsonProperty("daily_vaccinations")
+	private Integer dailyVaccinations;
 
-    private Date date;
+	private Date date;
+
 }

@@ -14,18 +14,15 @@ import java.util.List;
 @Mapper
 public interface DatasetDtoMapper {
 
-    DatasetCountryDto toCountryDto(Dataset dataset);
+	DatasetCountryDto toCountryDto(Dataset dataset);
 
-    DatasetDailyVaccinationsDto toDailyVaccinationsDto(Dataset dataset);
+	DatasetDailyVaccinationsDto toDailyVaccinationsDto(Dataset dataset);
 
-    DatasetTotalVaccinationsDto toTotalVaccinationsDto(Dataset dataset);
+	DatasetTotalVaccinationsDto toTotalVaccinationsDto(Dataset dataset);
 
-    default DatasetDatesDto toCountryDates(List<Date> dates){
-        Iterator<Date> it = dates.iterator();
-        return DatasetDatesDto.builder()
-                .startDate(it.next())
-                .endDate(it.next())
-                .build();
-    }
+	default DatasetDatesDto toCountryDates(List<Date> dates) {
+		Iterator<Date> it = dates.iterator();
+		return DatasetDatesDto.builder().startDate(it.next()).endDate(it.next()).build();
+	}
 
 }

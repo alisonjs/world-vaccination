@@ -7,7 +7,8 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface UserEntityMapper {
 
-    UserEntity fromModel(User user);
+	UserEntity fromModel(User user);
 
-    User toModel(UserEntity entity);
+	User toModel(UserEntity entity);
+
 }

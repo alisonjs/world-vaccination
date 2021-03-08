@@ -15,17 +15,17 @@ import java.util.Date;
 @Builder
 public class DatasetCountryDto implements Serializable {
 
-    private String country;
+	private String country;
 
-    @JsonProperty("daily_vaccinations")
-    private Integer dailyVaccinations;
+	@JsonProperty("daily_vaccinations")
+	private Integer dailyVaccinations;
 
-    private Date date;
+	private Date date;
 
-    @JsonProperty("total_vaccinations")
-    private Long totalVaccinations;
+	@JsonProperty("total_vaccinations")
+	private Long totalVaccinations;
 
-    @JsonProperty("total_vaccinations_per_hundred")
-    private Double totalVaccinationsPerHundred;
+	@JsonProperty("total_vaccinations_per_hundred")
+	private Double totalVaccinationsPerHundred;
 
 }

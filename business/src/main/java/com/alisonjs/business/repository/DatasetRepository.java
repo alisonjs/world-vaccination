@@ -8,17 +8,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DatasetRepository {
-    Dataset save(Dataset dataset);
 
-    List<String> getCountries();
+	Dataset save(Dataset dataset);
 
-    Dataset findCountryInfo(String country, Date date);
+	List<String> getCountries();
 
-    List<Dataset> findCountryInfos(String country, Date date);
+	Dataset findCountryInfo(String country, Date date);
 
-    List<Dataset> findAllByDate(Date date);
+	List<Dataset> findCountryInfos(String country, Date date);
 
-    List<Dataset> findAllByDateAndLimit(Date date, Integer limit);
+	List<Dataset> findAllByDate(Date date);
 
-    List<Date> getDatesByCountry(String country);
+	List<Dataset> findAllByDateAndLimit(Date date, Integer limit);
+
+	List<Date> getDatesByCountry(String country);
+
 }

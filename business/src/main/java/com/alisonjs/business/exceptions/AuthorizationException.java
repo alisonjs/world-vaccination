@@ -1,8 +1,9 @@
 package com.alisonjs.business.exceptions;
 
-public class AuthorizationException extends RuntimeException{
+public class AuthorizationException extends RuntimeException {
 
-    public AuthorizationException(String msg){
-        super(msg);
-    }
+	public AuthorizationException(String msg) {
+		super(msg);
+	}
+
 }

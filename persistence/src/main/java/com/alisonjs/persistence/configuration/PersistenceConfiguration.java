@@ -8,12 +8,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@PropertySource(
-        value = {"classpath:/persistence-application.properties", "classpath:/application.properties" },
-        ignoreResourceNotFound = true)
-@ComponentScan("com.alisonjs.persistence")
+@PropertySource(value = { "classpath:/persistence-application.properties", "classpath:/application.properties" },
+		ignoreResourceNotFound = true)
+@ComponentScan({ "com.alisonjs.business", "com.alisonjs.persistence" })
 @EntityScan(basePackages = "com.alisonjs.persistence.entity")
 @EnableJpaRepositories(basePackages = { "com.alisonjs.persistence.repository" })
 @EnableTransactionManagement
 public class PersistenceConfiguration {
+
 }

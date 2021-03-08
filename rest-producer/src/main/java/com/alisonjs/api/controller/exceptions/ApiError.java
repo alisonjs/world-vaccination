@@ -12,9 +12,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ApiError {
-    private int code;
 
-    private String msg;
+	private int code;
 
-    private Date date;
+	private String msg;
+
+	private Date date;
+
 }

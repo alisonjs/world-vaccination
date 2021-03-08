@@ -8,8 +8,8 @@ import org.mapstruct.Mapper;
 @Mapper(builder = @Builder(disableBuilder = true))
 public interface UserDtoMapper {
 
-    UserDto fromModel(User user);
+	UserDto fromModel(User user);
 
-    User toModel(UserDto user);
+	User toModel(UserDto user);
 
 }

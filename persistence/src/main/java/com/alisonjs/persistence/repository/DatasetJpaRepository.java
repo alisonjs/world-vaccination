@@ -13,19 +13,19 @@ import java.util.Optional;
 @Repository
 public interface DatasetJpaRepository extends JpaRepository<DatasetEntity, Long> {
 
-    @Query("SELECT DISTINCT d.country FROM dataset d order by d.country")
-    List<String> findAllCountries();
+	@Query("SELECT DISTINCT d.country FROM dataset d order by d.country")
+	List<String> findAllCountries();
 
-    Optional<DatasetEntity> findDatasetEntityByCountryIgnoreCaseAndDate(String country, Date date);
+	Optional<DatasetEntity> findDatasetEntityByCountryIgnoreCaseAndDate(String country, Date date);
 
-    List<DatasetEntity> findAllByCountryIgnoreCaseAndDateIsLessThanEqualOrderByDateAsc(String country, Date date);
+	List<DatasetEntity> findAllByCountryIgnoreCaseAndDateIsLessThanEqualOrderByDateAsc(String country, Date date);
 
-    List<DatasetEntity> findAllByTotalVaccinationsNotNullAndDate(Date date);
+	List<DatasetEntity> findAllByTotalVaccinationsNotNullAndDate(Date date);
 
-    List<DatasetEntity> findAllByTotalVaccinationsIsNotNullAndDate(Date date, Pageable pageable);
+	List<DatasetEntity> findAllByTotalVaccinationsIsNotNullAndDate(Date date, Pageable pageable);
 
-    DatasetEntity findFirstByCountryIgnoreCaseOrderByDateAsc(String country);
+	DatasetEntity findFirstByCountryIgnoreCaseOrderByDateAsc(String country);
 
-    DatasetEntity findFirstByCountryIgnoreCaseOrderByDateDesc(String country);
+	DatasetEntity findFirstByCountryIgnoreCaseOrderByDateDesc(String country);
 
 }

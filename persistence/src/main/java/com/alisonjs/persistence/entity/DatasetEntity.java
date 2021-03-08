@@ -13,52 +13,52 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity(name = "dataset")
-public class DatasetEntity extends BaseEntity{
+public class DatasetEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String country;
+	private String country;
 
-    @Column(name = "iso_code")
-    private String isoCode;
+	@Column(name = "iso_code")
+	private String isoCode;
 
-    private Date date;
+	private Date date;
 
-    @Column(name = "total_vaccinations")
-    private Long totalVaccinations;
+	@Column(name = "total_vaccinations")
+	private Long totalVaccinations;
 
-    @Column(name = "people_vaccinated")
-    private Long peopleVaccinated;
+	@Column(name = "people_vaccinated")
+	private Long peopleVaccinated;
 
-    @Column(name = "people_fully_vaccinated")
-    private Long peopleFullyVaccinated;
+	@Column(name = "people_fully_vaccinated")
+	private Long peopleFullyVaccinated;
 
-    @Column(name = "daily_vaccinations_raw")
-    private Integer dailyVaccinationsRaw;
+	@Column(name = "daily_vaccinations_raw")
+	private Integer dailyVaccinationsRaw;
 
-    @Column(name = "daily_vaccinations")
-    private Integer dailyVaccinations;
+	@Column(name = "daily_vaccinations")
+	private Integer dailyVaccinations;
 
-    @Column(name = "total_vaccinations_per_hundred")
-    private Double totalVaccinationsPerHundred;
+	@Column(name = "total_vaccinations_per_hundred")
+	private Double totalVaccinationsPerHundred;
 
-    @Column(name = "people_vaccinated_per_hundred")
-    private Double peopleVaccinatedPerHundred;
+	@Column(name = "people_vaccinated_per_hundred")
+	private Double peopleVaccinatedPerHundred;
 
-    @Column(name = "people_fully_vaccinated_per_hundred")
-    private Double peopleFullyVaccinatedPerHundred;
+	@Column(name = "people_fully_vaccinated_per_hundred")
+	private Double peopleFullyVaccinatedPerHundred;
 
-    @Column(name = "daily_vaccinations_per_million")
-    private Double dailyVaccinationsPerMillion;
+	@Column(name = "daily_vaccinations_per_million")
+	private Double dailyVaccinationsPerMillion;
 
-    private String vaccines;
+	private String vaccines;
 
-    @Column(name = "source_name")
-    private String sourceName;
+	@Column(name = "source_name")
+	private String sourceName;
 
-    @Column(name = "source_website")
-    private String sourceWebsite;
+	@Column(name = "source_website")
+	private String sourceWebsite;
 
 }

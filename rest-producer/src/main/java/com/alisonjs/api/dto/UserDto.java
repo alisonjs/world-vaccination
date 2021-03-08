@@ -12,14 +12,14 @@ import java.io.Serializable;
 @Builder
 public class UserDto implements Serializable {
 
-    private Long id;
+	private Long id;
 
-    private String email;
+	private String email;
 
-    private String username;
+	private String username;
 
-    @Getter(onMethod = @__({@JsonIgnore}))
-    @Setter(onMethod = @__({@JsonProperty}))
-    private String password;
+	@Getter(onMethod = @__({ @JsonIgnore }))
+	@Setter(onMethod = @__({ @JsonProperty }))
+	private String password;
 
 }

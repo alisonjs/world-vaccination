@@ -13,12 +13,12 @@ import java.io.Serializable;
 @Builder
 public class User implements Serializable {
 
-    private Long id;
+	private Long id;
 
-    private String email;
+	private String email;
 
-    private String username;
+	private String username;
 
-    private String password;
+	private String password;
 
 }

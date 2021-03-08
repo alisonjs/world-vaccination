@@ -11,7 +11,7 @@ import javax.persistence.Version;
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    @Version
-    private long version;
+	@Version
+	private long version;
 
 }

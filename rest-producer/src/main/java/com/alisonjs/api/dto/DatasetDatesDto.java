@@ -14,10 +14,10 @@ import java.util.Date;
 @Builder
 public class DatasetDatesDto {
 
-    @JsonProperty("start_date")
-    Date startDate;
+	@JsonProperty("start_date")
+	Date startDate;
 
-    @JsonProperty("end_date")
-    Date endDate;
+	@JsonProperty("end_date")
+	Date endDate;
 
 }
