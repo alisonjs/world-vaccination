@@ -2,8 +2,11 @@ package com.alisonjs.api.config;
 
 import com.alisonjs.api.dto.UserDto;
 import com.alisonjs.api.dto.mapper.UserDtoMapper;
+import com.alisonjs.business.repository.DatasetRepository;
 import com.alisonjs.business.repository.UserRepository;
+import com.alisonjs.business.service.DatasetService;
 import com.alisonjs.business.service.UserService;
+import com.alisonjs.business.service.impl.DatasetServiceImpl;
 import com.alisonjs.business.service.impl.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,4 +22,10 @@ public class ApiConfiguration {
     UserService userService(UserRepository userRepository){
         return new UserServiceImpl(userRepository);
     }
+
+    @Bean
+    DatasetService datasetService(DatasetRepository datasetRepository){
+        return new DatasetServiceImpl(datasetRepository);
+    }
+
 }

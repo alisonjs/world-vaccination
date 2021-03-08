@@ -2,6 +2,9 @@ package com.alisonjs.business.service;
 
 import com.alisonjs.business.domain.Dataset;
 
+import java.util.Date;
+import java.util.List;
+
 public interface DatasetService {
 
     /**
@@ -11,4 +14,15 @@ public interface DatasetService {
      */
     Dataset save(Dataset dataset);
 
+    List<String> getCountries();
+
+    Dataset getCountryInfo(String country, Date date);
+
+    List<Dataset> getDailyVaccinations(String country, Date date);
+
+    List<Dataset> getTotalVaccinations(Date date);
+
+    List<Dataset> getTotalVaccinations(Integer limit, Date date);
+
+    List<Date> getDates(String country);
 }

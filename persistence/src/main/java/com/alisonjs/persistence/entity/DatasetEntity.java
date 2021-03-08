@@ -32,7 +32,7 @@ public class DatasetEntity extends BaseEntity{
     @Column(name = "people_vaccinated")
     private Long peopleVaccinated;
 
-    @Column(name = "people_fully_cavvinated")
+    @Column(name = "people_fully_vaccinated")
     private Long peopleFullyVaccinated;
 
     @Column(name = "daily_vaccinations_raw")
