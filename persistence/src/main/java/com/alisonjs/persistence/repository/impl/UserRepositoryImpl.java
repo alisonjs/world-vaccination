@@ -48,4 +48,9 @@ public class UserRepositoryImpl implements UserRepository {
 		return repository.findByUsernameAndPassword(username, password).map(mapper::toModel).orElse(null);
 	}
 
+	@Override
+	public User getByUsername(String username) {
+		return mapper.toModel(repository.findUserEntityByUsername(username));
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.alisonjs.persistence.entity;
 
+import com.alisonjs.business.domain.types.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,5 +27,8 @@ public class UserEntity extends BaseEntity {
 
 	@Column(length = 100, nullable = false)
 	private String password;
+
+	@Enumerated(EnumType.STRING)
+	private UserRole role;
 
 }

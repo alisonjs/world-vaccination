@@ -1,5 +1,6 @@
 package com.alisonjs.business.domain;
 
+import com.alisonjs.business.domain.types.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +21,7 @@ public class User implements Serializable {
 	private String username;
 
 	private String password;
+
+	private UserRole role;
 
 }

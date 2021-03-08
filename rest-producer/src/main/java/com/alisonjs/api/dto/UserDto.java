@@ -1,5 +1,6 @@
 package com.alisonjs.api.dto;
 
+import com.alisonjs.business.domain.types.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -21,5 +22,7 @@ public class UserDto implements Serializable {
 	@Getter(onMethod = @__({ @JsonIgnore }))
 	@Setter(onMethod = @__({ @JsonProperty }))
 	private String password;
+
+	private UserRole role;
 
 }

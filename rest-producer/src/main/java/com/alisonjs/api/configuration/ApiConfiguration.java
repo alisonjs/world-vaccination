@@ -1,4 +1,4 @@
-package com.alisonjs.api.config;
+package com.alisonjs.api.configuration;
 
 import com.alisonjs.business.repository.DatasetRepository;
 import com.alisonjs.business.repository.UserRepository;

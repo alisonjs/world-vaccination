@@ -23,6 +23,7 @@
 		<module>business</module>
 		<module>persistence</module>
 		<module>rest-producer</module>
+		<module>security</module>
 	</modules>
 	<dependencies>
 		<dependency>

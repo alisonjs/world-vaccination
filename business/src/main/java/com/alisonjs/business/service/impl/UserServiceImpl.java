@@ -9,6 +9,7 @@ import com.alisonjs.business.service.UserService;
 import com.alisonjs.business.utils.HashUtil;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Alison Silva (alison.dev.silva@gmail.com)
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User save(User user) throws BusinessException {
 		businessValidation(user);
+		normalize(user);
 		user.setPassword(HashUtil.getSecureHash(user.getPassword()));
 		return repository.save(user);
 	}
@@ -45,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String username, String password) {
-		User userLogged = repository.getByUsernameAndPassword(username, HashUtil.getSecureHash(password));
+		User userLogged = repository.getByUsernameAndPassword(username.toLowerCase(), HashUtil.getSecureHash(password));
 		if (userLogged == null) {
 			throw new AuthorizationException("User or password incorrect.");
 		}
@@ -65,6 +67,16 @@ public class UserServiceImpl implements UserService {
 		if (user.getEmail() == null || user.getEmail().isEmpty()) {
 			throw new BusinessException("Email required");
 		}
+	}
+
+	@Override
+	public void normalize(User user) {
+		user.setUsername(user.getUsername().toLowerCase());
+	}
+
+	@Override
+	public User getByUsername(String username) {
+		return repository.getByUsername(username.toLowerCase());
 	}
 
 }

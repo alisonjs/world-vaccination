@@ -40,4 +40,7 @@ public interface UserService {
 
 	void businessValidation(User user) throws BusinessException;
 
+	void normalize(User user);
+
+	User getByUsername(String username);
 }
