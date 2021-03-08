@@ -22,7 +22,7 @@ public class UserAuthenticationManager {
         this.authenticationManager = authenticationManager;
     }
 
-    UserToken auth(User user){
+    public UserToken auth(User user){
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);

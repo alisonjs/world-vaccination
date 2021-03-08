@@ -6,14 +6,16 @@ import com.alisonjs.business.service.DatasetService;
 import com.alisonjs.business.service.UserService;
 import com.alisonjs.business.service.impl.DatasetServiceImpl;
 import com.alisonjs.business.service.impl.UserServiceImpl;
+import com.alisonjs.security.authentication.UserAuthenticationManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.authentication.AuthenticationManager;
 
 @Configuration
 @PropertySource(value = { "classpath:/application.properties" }, ignoreResourceNotFound = true)
-@ComponentScan(basePackages = { "com.alisonjs.business", "com.alisonjs.persistence" })
+@ComponentScan(basePackages = { "com.alisonjs.business", "com.alisonjs.persistence", "com.alisonjs.security" })
 public class ApiConfiguration {
 
 	@Bean

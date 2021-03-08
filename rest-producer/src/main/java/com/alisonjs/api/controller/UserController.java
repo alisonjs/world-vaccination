@@ -2,9 +2,13 @@ package com.alisonjs.api.controller;
 
 import com.alisonjs.api.dto.UserDto;
 import com.alisonjs.api.dto.UserLoginDto;
+import com.alisonjs.api.dto.UserTokenDto;
 import com.alisonjs.api.dto.mapper.UserDtoMapper;
+import com.alisonjs.api.dto.mapper.UserTokenDtoMapper;
 import com.alisonjs.business.domain.User;
 import com.alisonjs.business.service.UserService;
+import com.alisonjs.security.authentication.UserAuthenticationManager;
+import com.alisonjs.security.provider.UserToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +25,15 @@ public class UserController {
 
 	private final UserDtoMapper mapper;
 
-	public UserController(UserService userService, UserDtoMapper mapper) {
+	private final UserTokenDtoMapper tokenDtoMapper;
+
+	private final UserAuthenticationManager userAuthenticationManager;
+
+	public UserController(UserService userService, UserDtoMapper mapper, UserTokenDtoMapper tokenDtoMapper, UserAuthenticationManager userAuthenticationManager) {
 		this.userService = userService;
 		this.mapper = mapper;
+		this.tokenDtoMapper = tokenDtoMapper;
+		this.userAuthenticationManager = userAuthenticationManager;
 	}
 
 	@PostMapping
@@ -53,9 +63,9 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<UserDto> login(@RequestBody UserLoginDto user) {
-		User loggedUer = userService.login(user.getUsername(), user.getPassword());
-		return ResponseEntity.ok(mapper.fromModel(loggedUer));
+	public ResponseEntity<UserTokenDto> login(@RequestBody UserLoginDto user) {
+		UserToken userToken = userAuthenticationManager.auth(mapper.formUserLoginDto(user));
+		return ResponseEntity.ok(tokenDtoMapper.fromModel(userToken));
 	}
 
 	@PutMapping("/{id}/password")

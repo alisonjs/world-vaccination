@@ -1,6 +1,7 @@
 package com.alisonjs.api.dto.mapper;
 
 import com.alisonjs.api.dto.UserDto;
+import com.alisonjs.api.dto.UserLoginDto;
 import com.alisonjs.business.domain.User;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -11,5 +12,7 @@ public interface UserDtoMapper {
 	UserDto fromModel(User user);
 
 	User toModel(UserDto user);
+
+	User formUserLoginDto(UserLoginDto userLoginDto);
 
 }
