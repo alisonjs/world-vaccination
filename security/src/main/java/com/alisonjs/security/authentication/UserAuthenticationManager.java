@@ -1,13 +1,17 @@
 package com.alisonjs.security.authentication;
 
 import com.alisonjs.business.domain.User;
+import com.alisonjs.security.constants.SecurityConstants;
 import com.alisonjs.security.provider.UserToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class UserAuthenticationManager {
@@ -23,8 +27,18 @@ public class UserAuthenticationManager {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        org.springframework.security.core.userdetails.User userSpring
+                = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+        List<String> roles = userSpring.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+        String jwt = JwtManager.createToken(userSpring.getUsername(), roles);
 
-        return JwtManager.createToken();
+        return UserToken.builder()
+                .token(jwt)
+                .tokenProvider(SecurityConstants.JWT_PROVIDER)
+                .build();
     }
 
 }
