@@ -13,6 +13,8 @@ import java.util.Date;
 @Data
 public class Dataset {
 
+	private long version;
+
 	private Long id;
 
 	private String country;

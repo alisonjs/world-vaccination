@@ -14,6 +14,8 @@ import java.io.Serializable;
 @Builder
 public class User implements Serializable {
 
+	private long version;
+
 	private Long id;
 
 	private String email;

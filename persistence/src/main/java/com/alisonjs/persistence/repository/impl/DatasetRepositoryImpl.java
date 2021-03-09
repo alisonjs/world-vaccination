@@ -71,7 +71,9 @@ public class DatasetRepositoryImpl implements DatasetRepository {
 		DatasetEntity startDate = repository.findFirstByCountryIgnoreCaseOrderByDateAsc(country);
 
 		DatasetEntity endDate = repository.findFirstByCountryIgnoreCaseOrderByDateDesc(country);
-
+		if(startDate == null || endDate == null){
+			return null;
+		}
 		return List.of(startDate.getDate(), endDate.getDate());
 	}
 

@@ -24,7 +24,7 @@
 		<module>persistence</module>
 		<module>rest-producer</module>
 		<module>security</module>
-	</modules>
+    </modules>
 	<dependencies>
 		<dependency>
 			<groupId>io.spring.javaformat</groupId>

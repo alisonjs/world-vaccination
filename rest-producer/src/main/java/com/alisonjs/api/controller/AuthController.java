@@ -8,11 +8,13 @@ import com.alisonjs.business.domain.User;
 import com.alisonjs.business.service.UserService;
 import com.alisonjs.security.authentication.UserAuthenticationManager;
 import com.alisonjs.security.provider.UserToken;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/auth", produces = "application/json")
 @CrossOrigin(origins = "*")
 public class AuthController {
 
@@ -31,8 +33,13 @@ public class AuthController {
         this.userAuthenticationManager = userAuthenticationManager;
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Signed user and access token"),
+            @ApiResponse(code = 400, message = "Bad request"),
+            @ApiResponse(code = 401, message = "Bad credentials")
+    })
     @PostMapping("/signin")
-    public ResponseEntity<UserTokenDto> login(@RequestBody UserLoginDto userDto) {
+    public ResponseEntity<UserTokenDto> signin(@RequestBody UserLoginDto userDto) {
         UserToken userToken = userAuthenticationManager.auth(mapper.formUserLoginDto(userDto));
         User user = userService.login(userDto.getUsername(), userDto.getPassword());
         UserTokenDto userTokenDto = tokenDtoMapper.fromModel(userToken);
