@@ -1,7 +1,6 @@
 package com.alisonjs.security.authentication;
 
 import com.alisonjs.business.domain.User;
-import com.alisonjs.security.constants.SecurityConstants;
 import com.alisonjs.security.provider.UserToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,8 +17,11 @@ public class UserAuthenticationManager {
 
     private final AuthenticationManager authenticationManager;
 
-    public UserAuthenticationManager(AuthenticationManager authenticationManager) {
+    private final JwtManager jwtManager;
+
+    public UserAuthenticationManager(AuthenticationManager authenticationManager, JwtManager jwtManager) {
         this.authenticationManager = authenticationManager;
+        this.jwtManager = jwtManager;
     }
 
     public UserToken auth(User user){
@@ -33,12 +35,8 @@ public class UserAuthenticationManager {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        String jwt = JwtManager.createToken(userSpring.getUsername(), roles);
 
-        return UserToken.builder()
-                .token(jwt)
-                .tokenProvider(SecurityConstants.JWT_PROVIDER)
-                .build();
+        return jwtManager.createToken(userSpring.getUsername(), roles);
     }
 
 }

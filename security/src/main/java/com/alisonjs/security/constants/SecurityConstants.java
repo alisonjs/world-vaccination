@@ -14,6 +14,8 @@ public class SecurityConstants {
 
     public static String JWT_ROLE_KEY;
 
+    public static final String JWT_INVALID_MESSAGE = "Invalid JWT token";
+
     @Value("${world-vaccination.security.jwt-exp-days}")
     public void setJWT_EXP_DAYS(int jwtExpDays){
         JWT_EXP_DAYS = jwtExpDays;
