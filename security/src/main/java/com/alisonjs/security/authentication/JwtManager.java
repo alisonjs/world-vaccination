@@ -6,12 +6,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Builder;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.List;
 
-@Component
+@Builder
 public class JwtManager {
 
     public UserToken createToken(String username, List<String> roles){
@@ -31,11 +32,11 @@ public class JwtManager {
                 .build();
     }
 
-    public Claims parseToken(String jwt) throws JwtException {
+    public Claims parseToken(String jws) throws JwtException {
 
         return Jwts.parser()
-                .setSigningKey(SecurityConstants.API_KEY)
-                .parseClaimsJwt(jwt)
+                .setSigningKey(SecurityConstants.API_KEY.getBytes())
+                .parseClaimsJws(jws)
                 .getBody();
     }
 }

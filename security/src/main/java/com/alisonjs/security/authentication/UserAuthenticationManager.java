@@ -17,11 +17,8 @@ public class UserAuthenticationManager {
 
     private final AuthenticationManager authenticationManager;
 
-    private final JwtManager jwtManager;
-
-    public UserAuthenticationManager(AuthenticationManager authenticationManager, JwtManager jwtManager) {
+    public UserAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        this.jwtManager = jwtManager;
     }
 
     public UserToken auth(User user){
@@ -36,7 +33,7 @@ public class UserAuthenticationManager {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return jwtManager.createToken(userSpring.getUsername(), roles);
+        return JwtManager.builder().build().createToken(userSpring.getUsername(), roles);
     }
 
 }

@@ -25,22 +25,15 @@ import java.util.List;
 
 public class AuthorizationFilter extends OncePerRequestFilter {
 
-    private final JwtManager jwtManager;
-
-    public AuthorizationFilter(JwtManager jwtManager) {
-        this.jwtManager = jwtManager;
-    }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-
         try{
             if(jwt != null && jwt.startsWith(SecurityConstants.JWT_PROVIDER)){
                 jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "");
-                Claims claims = jwtManager.parseToken(jwt);
-                String username = claims.getAudience();
+                Claims claims = JwtManager.builder().build().parseToken(jwt);
+                String username = claims.getSubject();
                 List<String> roles = (List<String>) claims.get(SecurityConstants.JWT_ROLE_KEY);
 
                 List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
