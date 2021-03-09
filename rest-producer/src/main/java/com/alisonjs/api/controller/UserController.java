@@ -17,24 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "users")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
 	private final UserService userService;
 
 	private final UserDtoMapper mapper;
 
-	private final UserTokenDtoMapper tokenDtoMapper;
-
-	private final UserAuthenticationManager userAuthenticationManager;
-
-	public UserController(UserService userService, UserDtoMapper mapper, UserTokenDtoMapper tokenDtoMapper,
-			UserAuthenticationManager userAuthenticationManager) {
+	public UserController(UserService userService, UserDtoMapper mapper) {
 		this.userService = userService;
 		this.mapper = mapper;
-		this.tokenDtoMapper = tokenDtoMapper;
-		this.userAuthenticationManager = userAuthenticationManager;
 	}
 
 	@PostMapping
@@ -61,12 +54,6 @@ public class UserController {
 		List<UserDto> users = new ArrayList<>();
 		userService.getAll().forEach(user -> users.add(mapper.fromModel(user)));
 		return ResponseEntity.ok(users);
-	}
-
-	@PostMapping("/login")
-	public ResponseEntity<UserTokenDto> login(@RequestBody UserLoginDto user) {
-		UserToken userToken = userAuthenticationManager.auth(mapper.formUserLoginDto(user));
-		return ResponseEntity.ok(tokenDtoMapper.fromModel(userToken));
 	}
 
 	@PutMapping("/{id}/password")

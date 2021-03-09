@@ -22,4 +22,7 @@ public class UserTokenDto implements Serializable {
 	@JsonProperty("token_provider")
 	private String tokenProvider;
 
+	@JsonProperty("user")
+	private UserDto user;
+
 }

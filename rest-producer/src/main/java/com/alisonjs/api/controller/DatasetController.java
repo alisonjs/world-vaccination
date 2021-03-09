@@ -15,8 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "dataset")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/dataset")
+@CrossOrigin(origins = "*")
 public class DatasetController {
 
 	private final DatasetService datasetService;
