@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar rest-producer/target/dependency/webapp-runner.jar --port $PORT rest-producer/target/*.war
