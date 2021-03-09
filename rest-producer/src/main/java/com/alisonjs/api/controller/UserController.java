@@ -29,7 +29,8 @@ public class UserController {
 
 	private final UserAuthenticationManager userAuthenticationManager;
 
-	public UserController(UserService userService, UserDtoMapper mapper, UserTokenDtoMapper tokenDtoMapper, UserAuthenticationManager userAuthenticationManager) {
+	public UserController(UserService userService, UserDtoMapper mapper, UserTokenDtoMapper tokenDtoMapper,
+			UserAuthenticationManager userAuthenticationManager) {
 		this.userService = userService;
 		this.mapper = mapper;
 		this.tokenDtoMapper = tokenDtoMapper;

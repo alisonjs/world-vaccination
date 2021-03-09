@@ -25,57 +25,57 @@ import java.util.List;
 
 public class AuthorizationFilter extends OncePerRequestFilter {
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        try{
-            if(jwt != null && jwt.startsWith(SecurityConstants.JWT_PROVIDER)){
-                jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "");
-                Claims claims = JwtManager.builder().build().parseToken(jwt);
-                String username = claims.getSubject();
-                List<String> roles = (List<String>) claims.get(SecurityConstants.JWT_ROLE_KEY);
+		try {
+			if (jwt != null && jwt.startsWith(SecurityConstants.JWT_PROVIDER)) {
+				jwt = jwt.replace(SecurityConstants.JWT_PROVIDER, "");
+				Claims claims = JwtManager.builder().build().parseToken(jwt);
+				String username = claims.getSubject();
+				List<String> roles = (List<String>) claims.get(SecurityConstants.JWT_ROLE_KEY);
 
-                List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+				List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-                roles.forEach((role) -> grantedAuthorities.add(new SimpleGrantedAuthority(role)));
+				roles.forEach((role) -> grantedAuthorities.add(new SimpleGrantedAuthority(role)));
 
-                Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities);
+				Authentication authentication = new UsernamePasswordAuthenticationToken(username, null,
+						grantedAuthorities);
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                filterChain.doFilter(request, response);
+				filterChain.doFilter(request, response);
 
-            }else{
-                PrintWriter writer = response.getWriter();;
+			}
+			else {
+				PrintWriter writer = response.getWriter();
+				;
 
-                JwtError jwtError = JwtError.builder()
-                        .code(HttpStatus.UNAUTHORIZED.value())
-                        .msg(SecurityConstants.JWT_INVALID_MESSAGE)
-                        .date(new Date())
-                        .build();
+				JwtError jwtError = JwtError.builder().code(HttpStatus.UNAUTHORIZED.value())
+						.msg(SecurityConstants.JWT_INVALID_MESSAGE).date(new Date()).build();
 
-                ObjectMapper mapper = new ObjectMapper();
-                writer.write(mapper.writeValueAsString(jwtError));
+				ObjectMapper mapper = new ObjectMapper();
+				writer.write(mapper.writeValueAsString(jwtError));
 
-                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            }
-        }catch (Exception e){
-            PrintWriter writer = response.getWriter();
+				response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+				response.setStatus(HttpStatus.UNAUTHORIZED.value());
+			}
+		}
+		catch (Exception e) {
+			PrintWriter writer = response.getWriter();
 
-            JwtError jwtError = JwtError.builder()
-                    .code(HttpStatus.UNAUTHORIZED.value())
-                    .msg(e.getMessage())
-                    .date(new Date())
-                    .build();
+			JwtError jwtError = JwtError.builder().code(HttpStatus.UNAUTHORIZED.value()).msg(e.getMessage())
+					.date(new Date()).build();
 
-            ObjectMapper mapper = new ObjectMapper();
-            writer.write(mapper.writeValueAsString(jwtError));
+			ObjectMapper mapper = new ObjectMapper();
+			writer.write(mapper.writeValueAsString(jwtError));
 
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        }
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
+		}
 
-    }
+	}
+
 }

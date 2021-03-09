@@ -20,42 +20,39 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @PropertySource(value = { "classpath:/security-application.properties", "classpath:/application.properties" },
-        ignoreResourceNotFound = true)
+		ignoreResourceNotFound = true)
 @ComponentScan("com.alisonjs.security")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsProvider userDetailsService;
+	private final UserDetailsProvider userDetailsService;
 
-    private final CustomPasswordEncoder passwordEncoder;
+	private final CustomPasswordEncoder passwordEncoder;
 
-    public SecurityConfiguration(UserDetailsProvider userDetailsService, CustomPasswordEncoder passwordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-    }
+	public SecurityConfiguration(UserDetailsProvider userDetailsService, CustomPasswordEncoder passwordEncoder) {
+		this.userDetailsService = userDetailsService;
+		this.passwordEncoder = passwordEncoder;
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .anyRequest().authenticated();
-        http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests().anyRequest().authenticated();
+		http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+	}
 
-    @Bean(name= BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers(HttpMethod.GET, "/dataset/**")
-                .antMatchers(HttpMethod.POST, "/users/login");
-    }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(HttpMethod.GET, "/dataset/**").antMatchers(HttpMethod.POST, "/users/login");
+	}
+
 }

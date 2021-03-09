@@ -18,5 +18,6 @@ public interface UserRepository {
 
 	User getByUsernameAndPassword(String username, String password);
 
-    User getByUsername(String username);
+	User getByUsername(String username);
+
 }

@@ -12,9 +12,11 @@ import java.util.Date;
 @Builder
 @Data
 public class JwtError {
-    private int code;
 
-    private String msg;
+	private int code;
 
-    private Date date;
+	private String msg;
+
+	private Date date;
+
 }

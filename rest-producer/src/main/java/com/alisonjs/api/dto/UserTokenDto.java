@@ -14,11 +14,12 @@ import java.io.Serializable;
 @Data
 public class UserTokenDto implements Serializable {
 
-    private String token;
+	private String token;
 
-    @JsonProperty("expire_in")
-    private Long expireIn;
+	@JsonProperty("expire_in")
+	private Long expireIn;
 
-    @JsonProperty("token_provider")
-    private String tokenProvider;
+	@JsonProperty("token_provider")
+	private String tokenProvider;
+
 }

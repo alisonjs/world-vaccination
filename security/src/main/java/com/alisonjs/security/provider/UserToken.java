@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserToken {
 
-    private String token;
+	private String token;
 
-    private Long expireIn;
+	private Long expireIn;
 
-    private String tokenProvider;
+	private String tokenProvider;
 
 }

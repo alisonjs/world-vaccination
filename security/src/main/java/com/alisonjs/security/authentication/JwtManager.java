@@ -15,28 +15,20 @@ import java.util.List;
 @Builder
 public class JwtManager {
 
-    public UserToken createToken(String username, List<String> roles){
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, SecurityConstants.JWT_EXP_DAYS);
-        String jwt = Jwts.builder()
-                .setSubject(username)
-                .setExpiration(calendar.getTime())
-                .claim(SecurityConstants.JWT_ROLE_KEY, roles)
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.API_KEY.getBytes())
-                .compact();
+	public UserToken createToken(String username, List<String> roles) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, SecurityConstants.JWT_EXP_DAYS);
+		String jwt = Jwts.builder().setSubject(username).setExpiration(calendar.getTime())
+				.claim(SecurityConstants.JWT_ROLE_KEY, roles)
+				.signWith(SignatureAlgorithm.HS512, SecurityConstants.API_KEY.getBytes()).compact();
 
-        return UserToken.builder()
-                .token(jwt)
-                .tokenProvider(SecurityConstants.JWT_PROVIDER)
-                .expireIn(calendar.getTimeInMillis())
-                .build();
-    }
+		return UserToken.builder().token(jwt).tokenProvider(SecurityConstants.JWT_PROVIDER)
+				.expireIn(calendar.getTimeInMillis()).build();
+	}
 
-    public Claims parseToken(String jws) throws JwtException {
+	public Claims parseToken(String jws) throws JwtException {
 
-        return Jwts.parser()
-                .setSigningKey(SecurityConstants.API_KEY.getBytes())
-                .parseClaimsJws(jws)
-                .getBody();
-    }
+		return Jwts.parser().setSigningKey(SecurityConstants.API_KEY.getBytes()).parseClaimsJws(jws).getBody();
+	}
+
 }

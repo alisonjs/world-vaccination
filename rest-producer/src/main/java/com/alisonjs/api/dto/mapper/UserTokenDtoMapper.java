@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface UserTokenDtoMapper {
 
-    UserTokenDto fromModel(UserToken user);
+	UserTokenDto fromModel(UserToken user);
+
 }

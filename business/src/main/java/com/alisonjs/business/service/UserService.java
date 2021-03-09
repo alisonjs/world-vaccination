@@ -43,4 +43,5 @@ public interface UserService {
 	void normalize(User user);
 
 	User getByUsername(String username);
+
 }

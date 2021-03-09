@@ -15,25 +15,24 @@ import java.util.stream.Collectors;
 @Component
 public class UserAuthenticationManager {
 
-    private final AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
 
-    public UserAuthenticationManager(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
+	public UserAuthenticationManager(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+	}
 
-    public UserToken auth(User user){
+	public UserToken auth(User user) {
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
-        Authentication authentication = authenticationManager.authenticate(token);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        org.springframework.security.core.userdetails.User userSpring
-                = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-        List<String> roles = userSpring.getAuthorities()
-                .stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(),
+				user.getPassword());
+		Authentication authentication = authenticationManager.authenticate(token);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		org.springframework.security.core.userdetails.User userSpring = (org.springframework.security.core.userdetails.User) authentication
+				.getPrincipal();
+		List<String> roles = userSpring.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+				.collect(Collectors.toList());
 
-        return JwtManager.builder().build().createToken(userSpring.getUsername(), roles);
-    }
+		return JwtManager.builder().build().createToken(userSpring.getUsername(), roles);
+	}
 
 }

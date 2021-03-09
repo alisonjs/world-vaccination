@@ -15,20 +15,24 @@ import java.util.List;
 @Component
 public class UserDetailsProvider implements UserDetailsService {
 
-    private final UserService userService;
+	private final UserService userService;
 
-    public UserDetailsProvider(UserService userService) {
-        this.userService = userService;
-    }
+	public UserDetailsProvider(UserService userService) {
+		this.userService = userService;
+	}
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userService.getByUsername(username);
-        if(user == null) throw new UsernameNotFoundException("Doesn't exist user with username = " + username);
+		User user = userService.getByUsername(username);
+		if (user == null)
+			throw new UsernameNotFoundException("Doesn't exist user with username = " + username);
 
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+		List<GrantedAuthority> authorities = Collections
+				.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-    }
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				authorities);
+	}
+
 }
