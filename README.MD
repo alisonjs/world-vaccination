@@ -15,6 +15,11 @@ da aplicação.
 
 [Frontend Angular](https://github.com/alisonjs/world-vaccination-dashboard)
 
+#### Demo
+[World vaccination API](https://world-vaccinations.herokuapp.com/swagger-ui.html)
+
+[World vaccination dashboard](https://world-vaccinations-dashboard.herokuapp.com/swagger-ui.html)
+
 <br/>
 
 ---
@@ -33,9 +38,9 @@ RESTFul API desenvolvida com Spring Boot e PostgreSQL
 ### Pendente
 
 - [ ] Operação administrativa para atualização do dataset
-- [ ] Autenticação do usuário via JWT
-- [ ] Documentação da API com Swagger
-- [ ] Publicação do projeto no heroku
+- [x] Autenticação do usuário via JWT
+- [x] Documentação da API com Swagger
+- [x] Publicação do projeto no heroku
 
 # Item Extras (Pendentes)
 
@@ -71,20 +76,25 @@ cd world-vaccination
 ### Linux
 
 ```shell
-./mvnw clean install && ./mvnw spring-boot:run -pl rest-producer  
+./mvnw clean install && ./mvnw spring-boot:run -pl world-vaccination-rest-producer  
 ```
 
 ### Windows
 
 ```shell
-./mvnw.cmd clean install && ./mvnw.cmd spring-boot:run -pl rest-producer  
+./mvnw.cmd clean install && ./mvnw.cmd spring-boot:run -pl world-vaccination-rest-producer  
 ```
 
 ### Parâmetros
 
 ### API
 
-#### Users
+#### Auth
+
+- auth/signin -> autenticação de usuários
+  ```json 
+  {"username": "alisonjs", "password":"123"}
+  ```
 
 #### Dataset
 
@@ -121,6 +131,7 @@ Aplicação front end para exibição das informações do Dataset de vacinaçã
 ```shell
 git clone https://github.com/alisonjs/world-vaccination-dashboard.git
 cd world-vaccination-dashboard
+ng update
 ng serve
 ```
 
