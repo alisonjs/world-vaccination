@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar rest-producer/target/dependency/webapp-runner.jar --port $PORT rest-producer/target/*.war
+web: java $JAVA_OPTS -jar world-vaccination-rest-producer/target/dependency/webapp-runner.jar --port $PORT world-vaccination-rest-producer/target/*.war
