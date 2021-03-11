@@ -20,10 +20,11 @@
 	<url>https://github.com/alisonjs/world-vaccination</url>
 
 	<modules>
-		<module>business</module>
-		<module>persistence</module>
-		<module>rest-producer</module>
-		<module>security</module>
+		<module>world-vaccination-business</module>
+		<module>world-vaccination-persistence</module>
+		<module>world-vaccination-rest-producer</module>
+		<module>world-vaccination-security</module>
+        <module>world-vaccination-files-manager</module>
     </modules>
 	<dependencies>
 		<dependency>
