@@ -9,7 +9,6 @@ import com.alisonjs.business.service.UserService;
 import com.alisonjs.business.utils.HashUtil;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Alison Silva (alison.dev.silva@gmail.com)
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	public User getOne(Long id) {
 		User user = repository.getOne(id);
 		if (user == null) {
-			throw new NotFoundException("User not found with the given id  " + id);
+			throw new NotFoundException("User not found with the given id " + id);
 		}
 		return user;
 	}
@@ -56,15 +55,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void businessValidation(User user) throws BusinessException {
-		if (user.getUsername() == null || user.getUsername().isEmpty()) {
+		if (user.getUsername() == null || user.getUsername().isBlank()) {
 			throw new BusinessException("Username required");
 		}
 
-		if (user.getPassword() == null || user.getPassword().isEmpty()) {
+		if (user.getPassword() == null || user.getPassword().isBlank()) {
 			throw new BusinessException("Password required");
 		}
 
-		if (user.getEmail() == null || user.getEmail().isEmpty()) {
+		if (user.getEmail() == null || user.getEmail().isBlank()) {
 			throw new BusinessException("Email required");
 		}
 	}
