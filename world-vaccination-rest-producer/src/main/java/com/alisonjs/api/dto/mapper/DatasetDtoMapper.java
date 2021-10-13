@@ -7,6 +7,7 @@ import com.alisonjs.api.dto.DatasetTotalVaccinationsDto;
 import com.alisonjs.business.domain.Dataset;
 import org.mapstruct.Mapper;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -20,8 +21,8 @@ public interface DatasetDtoMapper {
 
 	DatasetTotalVaccinationsDto toTotalVaccinationsDto(Dataset dataset);
 
-	default DatasetDatesDto toCountryDates(List<Date> dates) {
-		Iterator<Date> it = dates.iterator();
+	default DatasetDatesDto toCountryDates(List<LocalDate> dates) {
+		Iterator<LocalDate> it = dates.iterator();
 		return DatasetDatesDto.builder().startDate(it.next()).endDate(it.next()).build();
 	}
 

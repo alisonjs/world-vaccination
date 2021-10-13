@@ -5,6 +5,7 @@ import com.alisonjs.business.exceptions.NotFoundException;
 import com.alisonjs.business.repository.DatasetRepository;
 import com.alisonjs.business.service.DatasetService;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -55,8 +56,8 @@ public class DatasetServiceImpl implements DatasetService {
 	}
 
 	@Override
-	public List<Date> getDates(String country) {
-		List<Date> dates = repository.getDatesByCountry(country);
+	public List<LocalDate> getDates(String country) {
+		List<LocalDate> dates = repository.getDatesByCountry(country);
 		if(dates == null || dates.isEmpty()){
 			throw new NotFoundException("Dates not found with the given country");
 		}

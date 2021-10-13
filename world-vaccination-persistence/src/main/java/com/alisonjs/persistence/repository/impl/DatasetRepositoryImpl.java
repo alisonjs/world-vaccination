@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,7 @@ public class DatasetRepositoryImpl implements DatasetRepository {
 	}
 
 	@Override
-	public List<Date> getDatesByCountry(String country) {
+	public List<LocalDate> getDatesByCountry(String country) {
 
 		DatasetEntity startDate = repository.findFirstByCountryIgnoreCaseOrderByDateAsc(country);
 
