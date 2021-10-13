@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -24,7 +25,8 @@ public class DatasetEntity extends BaseEntity {
 	@Column(name = "iso_code")
 	private String isoCode;
 
-	private Date date;
+	@Column(columnDefinition = "DATE")
+	private LocalDate date;
 
 	@Column(name = "total_vaccinations")
 	private Long totalVaccinations;

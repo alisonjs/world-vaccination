@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class Dataset {
 
 	private String isoCode;
 
-	private Date date;
+	private LocalDate date;
 
 	private Long totalVaccinations;
 

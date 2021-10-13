@@ -2,6 +2,7 @@ package com.alisonjs.business.service;
 
 import com.alisonjs.business.domain.Dataset;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,6 @@ public interface DatasetService {
 
 	List<Dataset> getTotalVaccinations(Integer limit, Date date);
 
-	List<Date> getDates(String country);
+	List<LocalDate> getDates(String country);
 
 }
