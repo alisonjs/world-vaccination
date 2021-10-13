@@ -33,7 +33,7 @@ public interface UserService {
 
 	/**
 	 * Log in
-	 * @param user User credentials
+	 * @param username User credentials
 	 * @return User logged
 	 */
 	User login(String username, String password);
