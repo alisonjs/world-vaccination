@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.alisonjs</groupId>
-            <artifactId>business</artifactId>
+            <artifactId>world-vaccination-business</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
